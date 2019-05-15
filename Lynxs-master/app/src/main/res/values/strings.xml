@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Lynxs</string>
+    <string name="bienvenidos">!Bienvenido Lince!</string>
+    <string name="stafftexto">Ingresa con tu correo institucional</string>
+    <string name="no_correo">Esté no es un correo institucional 😭</string>
+    <string name="iniciandoS">Iniciando Sesión…</string>
+    <string name="error_servicio">Ocurrió un error, inténtalo más tarde 😭</string>
+    <string name="error_inicio">Error, No se logró iniciar sesión</string>
+    <string name="error_cerrar">Error, No se logró cerrar sesión</string>
+    <string name="title_activity_principal">Map</string>
+    <string name="selecciona">Selecciona tu dispositivo bluetooth</string>
+    <string name="elige">Dispositivos cercanos</string>
+    <string name="telefono">Teléfono del Contacto</string>
+    <string name="nombre">Nombre del Contacto</string>
+    <string name="correo">Correo del contacto</string>
+    <string name="elige_contactos">Administrado de contactos</string>
+    <string name="no_contactos">No tienes contactos de confianza 😭</string>
+</resources>

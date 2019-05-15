@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "15452570700",
+    "firebase_url": "https://lynxs-8c088.firebaseio.com",
+    "project_id": "lynxs-8c088",
+    "storage_bucket": "lynxs-8c088.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15452570700:android:312372e721f853f9",
+        "android_client_info": {
+          "package_name": "com.jonathanlnb.lynxs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15452570700-jorq6u6p5lcandr20d7mvjuodgf6k9u1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jonathanlnb.lynxs",
+            "certificate_hash": "382b21a4212ed8742c2ad4e0c8031c0ec0814375"
+          }
+        },
+        {
+          "client_id": "15452570700-ebcjiafcfr1j84odti1sunafm9l47prt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN_YacpJNFJK4D9TRtxNKNamawl_n_vS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15452570700-ebcjiafcfr1j84odti1sunafm9l47prt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
