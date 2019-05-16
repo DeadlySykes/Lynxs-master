@@ -2,11 +2,13 @@ package com.jonathanlnb.lynxs.Actividades;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -65,6 +67,8 @@ public class Principal extends FragmentActivity implements OnMapReadyCallback, V
     private ArrayList<BluetoothDevice> pairedDeviceArrayList;
     private ArrayAdapter<BluetoothDevice> pairedDeviceAdapter;
     private UUID myUUID;
+    public String cadena = "";
+    public AlertDialog.Builder builder;
 
     private ThreadConnectBTdevice myThreadConnectBTdevice;
     private ThreadConnected myThreadConnected;
@@ -95,7 +99,7 @@ public class Principal extends FragmentActivity implements OnMapReadyCallback, V
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter == null) {
             Toast.makeText(this,
-                    "Bluetooth is not supported on this hardware platform",
+                    "Bluetooth no esta soportado para esta plataforma",
                     Toast.LENGTH_LONG).show();
             finish();
             return;
@@ -182,7 +186,7 @@ public class Principal extends FragmentActivity implements OnMapReadyCallback, V
                 setup();
             } else {
                 Toast.makeText(this,
-                        "BlueTooth NOT enabled",
+                        "El dispositivo bluetooth no esta habilitado",
                         Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -255,10 +259,10 @@ public class Principal extends FragmentActivity implements OnMapReadyCallback, V
 
             if (success) {
                 //connect successful
-                final String msgconnected = "connect successful:\n"
+                /*final String msgconnected = "connect successful:\n"
                         + "BluetoothSocket: " + bluetoothSocket + "\n"
-                        + "BluetoothDevice: " + bluetoothDevice;
-
+                        + "BluetoothDevice: " + bluetoothDevice;*/
+                final String msgconnected = "Dispositivo conectado correctamente:\n";
                 runOnUiThread(new Runnable() {
 
                     @Override
@@ -292,10 +296,14 @@ public class Principal extends FragmentActivity implements OnMapReadyCallback, V
 
     }
 
+    /*--------------------------------------------------------------------*/
+    /*Aqui se hace la captura del mensaje por el modulo Bluetooth*/
+
     private class ThreadConnected extends Thread {
         private final BluetoothSocket connectedBluetoothSocket;
-        private final InputStream connectedInputStream;
-        private final OutputStream connectedOutputStream;
+        private InputStream connectedInputStream;
+        private OutputStream connectedOutputStream;
+
 
         public ThreadConnected(BluetoothSocket socket) {
             connectedBluetoothSocket = socket;
@@ -312,35 +320,52 @@ public class Principal extends FragmentActivity implements OnMapReadyCallback, V
 
             connectedInputStream = in;
             connectedOutputStream = out;
+
         }
 
         @Override
         public void run() {
             byte[] buffer = new byte[1024];
             int bytes;
-
             String strRx = "";
 
             while (true) {
                 try {
                     bytes = connectedInputStream.read(buffer);
-                    final String strReceived = new String(buffer, 0, bytes);
                     final String strByteCnt = String.valueOf(bytes) + " bytes received.\n";
-
+                    final String strReceived = new String(buffer, 0,bytes);
                     runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
-                            //textStatus.append(strReceived);
-                            //textByteCnt.append(strByteCnt);
+
+                            /*--------------------------------------------------------------------*/
+                            /*Aqui se hace la captura del mensaje por el modulo Bluetooth*/
+
+                            builder = new AlertDialog.Builder(Principal.this);
+                            builder.setMessage(strReceived).setCancelable(false);
+                            builder.setTitle("El mensaje es:");
+                            builder.setPositiveButton("Entendido", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                            AlertDialog mensaje = builder.create();
+                            mensaje.show();
+
+                            /*--------------------------------------------------------------------*/
+                            /*Aqui se hace la captura del mensaje por el modulo Bluetooth*/
+
                         }
                     });
+
 
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
 
-                    final String msgConnectionLost = "Connection lost:\n"
+                    final String msgConnectionLost = "La conexión se ha perdido.:\n"
                             + e.getMessage();
                     runOnUiThread(new Runnable() {
 
